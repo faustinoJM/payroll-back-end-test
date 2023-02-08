@@ -6,6 +6,8 @@ import { IUsersTokensRepository } from "../../modules/accounts/repositories/IUse
 import { UsersTokensRepository } from "../../modules/accounts/infra/typeorm/repositories/UsersTokensRepository";
 import { IEmployeesRepository } from "../../modules/employees/repositories/IEmployeesRepository";
 import { EmployeesRepository } from "../../modules/employees/infra/typeorm/repositories/EmployeesRepository";
+import IDepartmentsRepository from "../../modules/departments/repositories/IDepartmentsRepository";
+import DepartmentsRepository from "../../modules/departments/infra/typeorm/repositories/DepartmentsRepository";
 
 container.registerSingleton<IUsersRepository>(
     "UsersRepository",
@@ -17,7 +19,14 @@ container.registerSingleton<IEmployeesRepository>(
   EmployeesRepository
 )
 
+container.registerSingleton<IDepartmentsRepository>(
+  "DepartmentsRepository",
+  DepartmentsRepository
+)
+
 container.registerSingleton<IUsersTokensRepository>(
   "UsersTokensRepository",
   UsersTokensRepository
 )
+
+
