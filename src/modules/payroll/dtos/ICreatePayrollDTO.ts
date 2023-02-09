@@ -7,8 +7,8 @@ interface ICreatePayrollDTO {
   dependents?: number;
   positionName?: string | null;
   departamentsName?: string | null;
-  salary_base?: number;
-  salary_liquid?: number;
+  salary_base?: number | string;
+  salary_liquid?: number | string;
   month?: number;
   year?: number;
   tabelaSalario?: ISalario;

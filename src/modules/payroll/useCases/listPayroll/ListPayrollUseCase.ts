@@ -50,15 +50,20 @@ class ListPayrollUseCase {
           return departments.find((department) => department.id === departmentId)
         }
 
+        function formatSalary() {
+          return new Intl.NumberFormat("de-DE")
+        }
+
         employees.map((employee) =>{
          let employeePayroll: ICreatePayrollDTO = {
+            id: employee.id,
             employee_id: employee.id,
             name: employee.name,
             dependents: employee.dependents,
             positionName: positionName(employee.position_id!)?.name,
             departamentsName: departmentName(employee.department_id!)?.name,
-            salary_base: employee.salary,
-            salary_liquid: calcularSalario(employee.salary, employee.dependents),
+            salary_base: formatSalary().format(employee.salary),
+            salary_liquid: formatSalary().format(calcularSalario(employee.salary, employee.dependents)),
             month: month,
             year: year,
             tabelaSalario: retornarTabela(employee.salary, employee.dependents)
@@ -72,7 +77,7 @@ class ListPayrollUseCase {
           // employeePayroll.salary_liquid = employe.salary;
           // employeePayroll.month = month;
           // employeePayroll.year = year;
-
+          delete employeePayroll.tabelaSalario
           listEmployeesPayrolls.push(employeePayroll)
 
         })

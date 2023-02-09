@@ -4,7 +4,6 @@ import AppError  from "../../../../shared/errors/AppError";
 import { IEmployeesRepository } from "../../repositories/IEmployeesRepository";
 
 
-
 @injectable()
 class ListEmployeeUseCase {
 

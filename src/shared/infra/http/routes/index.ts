@@ -11,7 +11,7 @@ const routes = Router();
 
 routes.use("/users", userRouter)
 routes.use("/employees", employeeRouter)
-routes.use("/payroll", payrollRouter)
+routes.use("/payrolls", payrollRouter)
 routes.use("/departments", departmentRouter)
 routes.use("/positions", positionRouter)
 routes.use(authenticateRoutes)
