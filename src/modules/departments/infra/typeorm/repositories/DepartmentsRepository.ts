@@ -12,10 +12,11 @@ class DepartmentsRepository implements IDepartmentsRepository {
       this.ormRepository = AppDataSource.getRepository(Department);
   }
   
-  public async create({ id, name }: ICreateDepartmentDTO): Promise<Department> {
+  public async create({ id, department_id, name }: ICreateDepartmentDTO): Promise<Department> {
 
       const appointment = this.ormRepository.create({
         id,
+        department_id,
         name
       })
 

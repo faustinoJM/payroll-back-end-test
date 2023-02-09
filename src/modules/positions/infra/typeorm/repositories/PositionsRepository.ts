@@ -1,6 +1,5 @@
 import { Repository } from 'typeorm';
 import { AppDataSource } from '../../../../../shared/infra/typeorm';
-import ICreateDepartmentDTO from '../../../dtos/ICreateDepartmentDTO';
 import ICreatePositionDTO from '../../../dtos/ICreatePositionDTO';
 import IPositionsRepository from '../../../repositories/IPositionsRepository';
 import Position from '../entities/Position';
@@ -13,10 +12,11 @@ class PositionsRepository implements IPositionsRepository {
       this.ormRepository = AppDataSource.getRepository(Position);
   }
   
-  public async create({ id, name }: ICreatePositionDTO): Promise<Position> {
+  public async create({ id, position_id, name }: ICreatePositionDTO): Promise<Position> {
 
       const position = this.ormRepository.create({
         id,
+        position_id,
         name
       })
 

@@ -1,38 +1,32 @@
 import { Column, CreateDateColumn, Double, Entity, Generated, JoinColumn, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 import Department from "../../../../departments/infra/typeorm/entities/Department";
+import { Employee } from "../../../../employees/infra/typeorm/entities/Employee";
 import Position from "../../../../positions/infra/typeorm/entities/Position";
 
-@Entity("employees")
-class Employee {
+@Entity("payrolls")
+class Payroll {
     @PrimaryColumn('uuid')
     id?: string;
   
     @Column()
-    employee_id: number;
+    employee_id: string;
+
+    @ManyToOne(() => Employee)
+    @JoinColumn({ name: "employee_id" })
+    employee: Employee
 
     @Column()
-    name: string;
+    salary_base: number;
 
     @Column()
-    salary: number;
+    salary_liquid: number;
 
     @Column()
-    dependents: number;
+    month: number;
 
     @Column()
-    position_id: string;
-    
-    @ManyToOne(() => Position)
-    @JoinColumn({ name: "position_id"})
-    position: Position;
-
-    @Column()
-    department_id: string; 
-
-    @ManyToOne(() => Department)
-    @JoinColumn({ name: "department_id"})
-    department: Department;
+    year: number;
 
     @CreateDateColumn()
     created_at: Date
@@ -47,4 +41,4 @@ class Employee {
     }
 }
 
-export { Employee };
+export { Payroll };

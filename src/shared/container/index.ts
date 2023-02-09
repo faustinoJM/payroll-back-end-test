@@ -8,6 +8,9 @@ import { IEmployeesRepository } from "../../modules/employees/repositories/IEmpl
 import { EmployeesRepository } from "../../modules/employees/infra/typeorm/repositories/EmployeesRepository";
 import IDepartmentsRepository from "../../modules/departments/repositories/IDepartmentsRepository";
 import DepartmentsRepository from "../../modules/departments/infra/typeorm/repositories/DepartmentsRepository";
+import IPositionsRepository from "../../modules/positions/repositories/IPositionsRepository";
+import PositionsRepository from "../../modules/positions/infra/typeorm/repositories/PositionsRepository";
+
 
 container.registerSingleton<IUsersRepository>(
     "UsersRepository",
@@ -22,6 +25,11 @@ container.registerSingleton<IEmployeesRepository>(
 container.registerSingleton<IDepartmentsRepository>(
   "DepartmentsRepository",
   DepartmentsRepository
+)
+
+container.registerSingleton<IPositionsRepository>(
+  "PositionsRepository",
+  PositionsRepository
 )
 
 container.registerSingleton<IUsersTokensRepository>(

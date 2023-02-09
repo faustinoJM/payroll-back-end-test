@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm"
 
-export class CreateEmployee1675600971696 implements MigrationInterface {
+export class CreateNewEmployee1675864075336 implements MigrationInterface {
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
@@ -15,7 +15,6 @@ export class CreateEmployee1675600971696 implements MigrationInterface {
           {
             name: 'employee_id',
             type: 'int',
-            isGenerated: true,
             generationStrategy: 'increment',
           },
           {
@@ -29,7 +28,12 @@ export class CreateEmployee1675600971696 implements MigrationInterface {
           },
           {
             name: "salary",
-            type: "real",
+            type: "int",
+          },
+          {
+            name: 'position_id',
+            type: 'uuid',
+            isNullable: true
           },
           {
             name: 'created_at',
@@ -41,8 +45,18 @@ export class CreateEmployee1675600971696 implements MigrationInterface {
             type: 'timestamp',
             default: 'now()'
           }
-        ],
 
+        ],
+        foreignKeys: [
+          {
+              name: "FKEmployeePosition",
+              referencedTableName: "positions",
+              referencedColumnNames: ["id"],
+              columnNames: ["position_id"],
+              onDelete: "SET NULL",
+              onUpdate: "SET NULL"
+          }
+      ]
       })
     )
   }

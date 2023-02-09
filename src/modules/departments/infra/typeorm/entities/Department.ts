@@ -6,8 +6,8 @@ class Department {
   @PrimaryColumn()
   id: string;
 
-  // @Column()
-  // department_id: number;
+  @PrimaryColumn()
+  department_id: number;
 
   @Column()
   name: string;

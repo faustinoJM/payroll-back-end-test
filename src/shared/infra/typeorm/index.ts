@@ -1,7 +1,9 @@
 import { DataSource} from "typeorm"
 import { User } from "../../../modules/accounts/infra/typeorm/entities/User"
 import { UserTokens } from "../../../modules/accounts/infra/typeorm/entities/UserTokens"
+import Department from "../../../modules/departments/infra/typeorm/entities/Department"
 import { Employee } from "../../../modules/employees/infra/typeorm/entities/Employee"
+import Position from "../../../modules/positions/infra/typeorm/entities/Position"
 
 
 const options:  any = {
@@ -14,7 +16,7 @@ const options:  any = {
     logging: true,
     synchronize: false,
     entities: [
-      User, UserTokens, Employee
+      User, UserTokens, Employee, Department, Position
         // "./src/modules/users/infra/typeorm/entities/.ts",
         // "./src/modules/appointments/infra/typeorm/entities/.ts"
 

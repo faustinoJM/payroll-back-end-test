@@ -14,6 +14,10 @@ class ListEmployeeUseCase {
     async execute() {
         
         const users = await this.employeeRepository.list();
+        users.map(user => {
+          console.log(user.salary)
+          // user.salary = parseFloat(user.salary.toFixed(2))
+        })
 
         return users;
 

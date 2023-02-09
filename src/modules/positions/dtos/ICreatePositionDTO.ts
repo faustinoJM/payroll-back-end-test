@@ -1,6 +1,6 @@
 export default interface ICreatePositionDTO {
   id?: string;
-  // department_id?: number;
+  position_id?: number;
   name: string;
 
 }

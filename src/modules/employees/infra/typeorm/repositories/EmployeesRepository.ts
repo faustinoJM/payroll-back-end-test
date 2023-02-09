@@ -11,9 +11,9 @@ class EmployeesRepository implements IEmployeesRepository {
         this.repository = AppDataSource.getRepository(Employee);
     }
     
-    async create({ id, employee_id, name, dependents, salary}: ICreateEmployeeDTO): Promise<void> {
+    async create({ id, employee_id, name, dependents, salary, position_id, department_id }: ICreateEmployeeDTO): Promise<void> {
         const user =  this.repository.create({
-            name, employee_id, salary, id, dependents
+            name, employee_id, salary, id, dependents, position_id, department_id
         });
         
         await this.repository.save(user);

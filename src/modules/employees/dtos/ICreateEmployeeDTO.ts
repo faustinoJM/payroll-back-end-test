@@ -4,6 +4,8 @@ interface ICreateEmployeeDTO {
   name: string;
   salary: number;
   dependents: number;
+  position_id: string;
+  department_id: string; 
 }
 
 export { ICreateEmployeeDTO };
