@@ -1,4 +1,4 @@
-import { ISalario } from "../useCases/listPayroll/ListPayrollUseCase";
+import { ISalario, IPayrollDemo } from "../useCases/listPayroll/ListPayrollUseCase";
 
 interface ICreatePayrollDTO {
   id?: string;
@@ -11,7 +11,17 @@ interface ICreatePayrollDTO {
   salary_liquid?: number | string;
   month?: number;
   year?: number;
+  Overtime50?: number;
+  Overtime100?: number;
+  totalWorkDaysMonth?: number;
+  totalWorkHourDays?: number;
+  absences?: number;
+  cashAdvances?: number;
+  backpay?: number;
+  bonus?: number;
+  totalIncome?: number
   tabelaSalario?: ISalario;
+  payrollDemo?: IPayrollDemo;
 }
 
 export { ICreatePayrollDTO };
