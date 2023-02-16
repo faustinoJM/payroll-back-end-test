@@ -45,9 +45,9 @@ class ListPayrollUseCase {
         private departmentsRepository: IDepartmentsRepository
         ) {}
 
-    async execute({  month, year, employee_id, Overtime50, Overtime100,
-                    absences, totalWorkDaysMonth, totalWorkHourDays,
-                    cashAdvances, backpay, bonus}: ICreatePayrollDTO) {
+    async execute({  month, year, employee_id, Overtime50 = 0, Overtime100 = 0,
+                    absences = 10, totalWorkDaysMonth = 26, totalWorkHourDays = 8,
+                    cashAdvances = 0, backpay = 0, bonus = 0}: ICreatePayrollDTO) {
         const listEmployeesPayrolls: ICreatePayrollDTO[] = [];
         // let employeePayroll: ICreatePayrollTO = {}
         const employees = await this.employeeRepository.list();
@@ -405,6 +405,7 @@ function calcTotalFaltas(faltas: number, salarioEmDias: number) {
 
 function calcTotalSalario(salario_base: number, totalHorasExtras: number,
    totalFaltas: number, totalAdiantamento: number, totalRetroativos: number, bonus: number) {
+    
   return salario_base + totalHorasExtras - totalFaltas - (totalAdiantamento - totalRetroativos - bonus);
 }
 
