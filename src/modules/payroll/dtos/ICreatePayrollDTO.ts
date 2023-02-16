@@ -19,7 +19,9 @@ interface ICreatePayrollDTO {
   cashAdvances?: number;
   backpay?: number;
   bonus?: number;
-  totalIncome?: number
+  IRPS?: number | string;
+  INSS?: number | string;
+  totalIncome?: number | string
   tabelaSalario?: ISalario;
   payrollDemo?: IPayrollDemo;
 }
