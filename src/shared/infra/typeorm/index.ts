@@ -29,7 +29,8 @@ const options:  any = {
         "schema/*.json"
     ],
     migrations: [
-        "./src/shared/infra/typeorm/migrations/*.ts"
+        // "./src/shared/infra/typeorm/migrations/*.ts"
+        `${__dirname}/**/migrations/*.{ts,js}`
     ],
     cli: {
         entitiesDir: "entity",
