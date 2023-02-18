@@ -37,8 +37,8 @@ const server = async () => {
       await AppDataSource.initialize();
       console.log("database initialize")
 
-      app.listen(3000)
-      console.log("server is listening On port:", 3000)
+      app.listen(process.env.PORT)
+      console.log("server is listening On port:")
       
   } catch (err) {
       console.log(err);
