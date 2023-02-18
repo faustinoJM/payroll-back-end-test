@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/src/shared/infra/http/server.js",
+    "start": "node dist/shared/infra/http/server.js",
     "dev": "ts-node-dev --inspect --respawn --ignore-watch node_modules src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "typeorm2": "typeorm-ts-node-commonjs -d ./src/shared/infra/typeorm/index.ts"
