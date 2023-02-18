@@ -7,12 +7,13 @@ import Position from "../../../modules/positions/infra/typeorm/entities/Position
 
 
 const options:  any = {
-    type: "postgres",
-    host: "localhost",
-    port: 5433,
-    username: "postgres",
-    password: "12345",
-    database: "payroll_test",
+     type: "postgres",
+    // host: "localhost",
+    // port: 5433,
+    // username: "postgres",
+    // password: "12345",
+    // database: "payroll_test",
+    url: "postgres://bjdzedfb:wylIfG4pfiX5Cx_IKXa2NrYP8RHVEQKO@babar.db.elephantsql.com/bjdzedfb", 
     logging: true,
     synchronize: false,
     entities: [

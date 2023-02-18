@@ -1,18 +1,18 @@
-import { Request, Response } from "express";
-import { container } from "tsyringe";
-import { CreatePayrollUseCase } from "./CreatePayrollUseCase";
+// import { Request, Response } from "express";
+// import { container } from "tsyringe";
+// import { CreatePayrollUseCase } from "./CreatePayrollUseCase";
 
-class CreatePayrollController {
+// class CreatePayrollController {
 
-    async handle(request: Request, response: Response) {
-        const { name } = request.body;
+//     async handle(request: Request, response: Response) {
+//         const { name } = request.body;
 
-        const createUserUseCase = container.resolve(CreatePayrollUseCase);
+//         const createUserUseCase = container.resolve(CreatePayrollUseCase);
 
-        const employee = await createUserUseCase.execute({ name })
+//         const employee = await createUserUseCase.execute({ name })
 
-        return response.json(employee);
-    }
-}
+//         return response.json(employee);
+//     }
+// }
 
-export { CreatePayrollController }
+// export { CreatePayrollController }
