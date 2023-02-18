@@ -15,10 +15,13 @@ class Employee {
     name: string;
 
     @Column()
-    salary: number;
+    salary: string;
 
     @Column()
     dependents: number;
+
+    @Column()
+    birth_date: Date; 
 
     @Column()
     position_id: string;

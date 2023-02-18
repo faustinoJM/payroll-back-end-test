@@ -71,11 +71,11 @@ class ListPayrollUseCase {
         }
 
         employees.map((employee) =>{
-          let salarioEmDias = calcSalarioEmDias(totalWorkDaysMonth!, employee.salary)
+          let salarioEmDias = calcSalarioEmDias(totalWorkDaysMonth!, +employee.salary)
           let salarioPorHora = calcSalarioPorHora(salarioEmDias, totalWorkHourDays!)
           let totalHorasExtra = calcTotalHorasExtras(salarioPorHora, Overtime50!, Overtime100!)
           let totalFaltas = calcTotalFaltas(absences!, salarioEmDias)
-          let totalSalario = +calcTotalSalario(employee.salary, totalHorasExtra, totalFaltas, cashAdvances!, backpay!, bonus!).toFixed(2)
+          let totalSalario = +calcTotalSalario(+employee.salary, totalHorasExtra, totalFaltas, cashAdvances!, backpay!, bonus!).toFixed(2)
           let IRPS = retornarIRPS(totalSalario, employee.dependents)
           let INSS = retornarINSS(totalSalario)
 
@@ -86,7 +86,7 @@ class ListPayrollUseCase {
             dependents: employee.dependents,
             positionName: positionName(employee.position_id!)?.name,
             departamentsName: departmentName(employee.department_id!)?.name,
-            salary_base: formatSalary().format(employee.salary),
+            salary_base: formatSalary().format(+employee.salary),
             salary_liquid: formatSalary().format(+calcularSalario(totalSalario, employee.dependents).toFixed(2)),
             month: month,
             year: year,
@@ -99,7 +99,7 @@ class ListPayrollUseCase {
             IRPS: formatSalary().format(+IRPS.toFixed(2)),
             INSS: formatSalary().format(+(totalSalario * 0.03).toFixed(2)),
             tabelaSalario: retornarTabela(totalSalario, employee.dependents),
-            payrollDemo: retornarPayrollDemo(employee.salary, Overtime50,
+            payrollDemo: retornarPayrollDemo(+employee.salary, Overtime50,
                Overtime100, totalWorkDaysMonth, totalWorkHourDays, absences,
                cashAdvances, backpay, bonus, totalSalario, IRPS, INSS)
 

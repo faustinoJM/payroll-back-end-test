@@ -5,11 +5,11 @@ import { CreateEmployeeUseCase } from "./CreateEmployeeUseCase";
 class CreateEmployeeController {
 
     async handle(request: Request, response: Response) {
-        const { employee_id, name, dependents, salary, position_id, department_id} = request.body;
+        const { employee_id, name, dependents, salary, position_id, department_id, birth_date} = request.body;
 
         const createEmployeeUseCase = container.resolve(CreateEmployeeUseCase);
 
-        await createEmployeeUseCase.execute({ employee_id, name, dependents, salary, position_id, department_id })
+        await createEmployeeUseCase.execute({ employee_id, name, dependents, salary, position_id, department_id, birth_date })
 
         return response.status(201).send();
     }

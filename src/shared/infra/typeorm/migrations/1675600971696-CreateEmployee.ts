@@ -32,6 +32,11 @@ export class CreateEmployee1675600971696 implements MigrationInterface {
             type: "real",
           },
           {
+            name: "birth_date",
+            type: "Date",
+            isNullable: true,
+          },
+          {
             name: 'created_at',
             type: "timestamp",
             default: "now()"
