@@ -6,4 +6,5 @@ export default interface IDepartmentsRepository {
   findByName(name: string): Promise<Department | null>;
   findById(id: string): Promise<Department | null>;
   list(): Promise<Department[] | []>;
+  delete(id: string): Promise<void>
 }

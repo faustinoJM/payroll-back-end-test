@@ -46,6 +46,10 @@ class PositionsRepository implements IPositionsRepository {
 
         return list;
   }
+
+  async delete(id: string) {
+    await this.ormRepository.delete(id)
+  }
 }
 
 export default PositionsRepository

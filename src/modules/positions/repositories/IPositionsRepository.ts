@@ -6,4 +6,5 @@ export default interface IPositionsRepository {
   findByName(name: string): Promise<Position | null>;
   findById(id: string): Promise<Position | null>;
   list(): Promise<Position[] | []>;
+  delete(id: string): Promise<void>
 }

@@ -17,6 +17,7 @@ interface IEmployeesRepository {
     findByName(name: string): Promise<Employee| null>;
     findByEmployeeId(employee_id: number): Promise<Employee | null>;
     findById(id: string): Promise<Employee | null>;
+    delete(id: string): Promise<void>
 
     list(): Promise<Employee[]>;
     

@@ -74,7 +74,7 @@ export class CreateEmployee1675600971696 implements MigrationInterface {
           },
           {
             name: "nuit",
-            type: "int",
+            type: "bigint",
           },
           {
             name: "bonus",
@@ -109,15 +109,15 @@ export class CreateEmployee1675600971696 implements MigrationInterface {
           },
           {
             name: "bank_account",
-            type: "int",
+            type: "bigint",
           },
           {
             name: "nib",
-            type: "int",
+            type: "bigint",
           },
           {
             name: "social_security",
-            type: "int",
+            type: "bigint",
           },
           {
             name: 'created_at',

@@ -46,6 +46,10 @@ class DepartmentsRepository implements IDepartmentsRepository {
 
         return list;
   }
+
+  async delete(id: string): Promise<void> {
+    await this.ormRepository.delete(id)
+  }
 }
 
 export default DepartmentsRepository

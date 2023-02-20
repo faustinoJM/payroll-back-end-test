@@ -83,6 +83,10 @@ class EmployeesRepository implements IEmployeesRepository {
         return list;
     }
 
+    async delete(id: string): Promise<void> {
+      await this.repository.delete(id)
+    }
+
 }
 
 export { EmployeesRepository };
