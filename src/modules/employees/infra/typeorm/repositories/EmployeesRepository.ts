@@ -11,9 +11,44 @@ class EmployeesRepository implements IEmployeesRepository {
         this.repository = AppDataSource.getRepository(Employee);
     }
     
-    async create({ id, employee_id, name, dependents, salary, position_id, department_id, birth_date }: ICreateEmployeeDTO): Promise<void> {
+    async create({ id, employee_id, name, dependents, salary, position_id, department_id, birth_date, 
+      place_birth,
+      nationality,
+      bi,
+      marital_status,
+      gender,
+      address,
+      contact,
+      email,
+      nuit,
+      bonus,
+      department,
+      position,
+      start_date,
+      employee_status,
+      bank_name,
+      bank_account,
+      nib,
+      social_security,}: ICreateEmployeeDTO): Promise<void> {
         const user =  this.repository.create({
-            name, employee_id, salary, id, dependents, position_id, department_id, birth_date
+            name, employee_id, salary, id, dependents, position_id, department_id, birth_date,
+            place_birth,
+            nationality,
+            bi,
+            marital_status,
+            gender,
+            address,
+            contact,
+            email,
+            nuit,
+            bonus,
+            start_date,
+            employee_status,
+            bank_name,
+            bank_account,
+            nib,
+            social_security,
+     
         });
         
         await this.repository.save(user);
@@ -51,3 +86,5 @@ class EmployeesRepository implements IEmployeesRepository {
 }
 
 export { EmployeesRepository };
+
+

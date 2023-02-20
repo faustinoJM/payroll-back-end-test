@@ -38,7 +38,7 @@ const server = async () => {
       console.log("database initialize")
 
       app.listen(process.env.PORT)
-      console.log("server is listening On port:")
+      console.log("server is listening On port:", process.env.PORT)
       
   } catch (err) {
       console.log(err);

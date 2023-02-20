@@ -67,7 +67,7 @@ class ListPayrollUseCase {
         }
 
         function formatSalary() {
-          return new Intl.NumberFormat("de-DE")
+          return new Intl.NumberFormat("de-DE",{minimumFractionDigits: 2})
         }
 
         employees.map((employee) =>{
@@ -78,7 +78,9 @@ class ListPayrollUseCase {
           let totalSalario = +calcTotalSalario(+employee.salary, totalHorasExtra, totalFaltas, cashAdvances!, backpay!, bonus!).toFixed(2)
           let IRPS = retornarIRPS(totalSalario, employee.dependents)
           let INSS = retornarINSS(totalSalario)
-
+          // console.log(parseFloat(employee.salary).toFixed(2))
+          console.log((+employee.salary).toFixed(2))
+          
          let employeePayroll: ICreatePayrollDTO = {
             id: employee.id,
             employee_id: employee.id,
@@ -86,7 +88,7 @@ class ListPayrollUseCase {
             dependents: employee.dependents,
             positionName: positionName(employee.position_id!)?.name,
             departamentsName: departmentName(employee.department_id!)?.name,
-            salary_base: formatSalary().format(+employee.salary),
+            salary_base: formatSalary().format(+(+employee.salary).toFixed(2)),
             salary_liquid: formatSalary().format(+calcularSalario(totalSalario, employee.dependents).toFixed(2)),
             month: month,
             year: year,

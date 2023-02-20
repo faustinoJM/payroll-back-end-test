@@ -21,7 +21,56 @@ class Employee {
     dependents: number;
 
     @Column()
-    birth_date: Date; 
+    birth_date: Date;
+    
+    @Column()
+    place_birth: string;
+
+    @Column()
+    nationality:  string;
+
+    @Column()
+    bi: string;
+
+    @Column()
+    marital_status: string;
+    
+    @Column()
+    gender: string;
+
+    @Column()
+    address: string;
+
+    @Column()
+    contact: number;
+
+    @Column()
+    email: string;
+
+    @Column()
+    nuit: number;
+
+    @Column()
+    bonus: string;
+
+    @Column()
+    start_date: Date;
+
+    @Column()
+    employee_status: string;
+
+    @Column()
+    bank_name: string;
+
+    @Column()
+    bank_account: number;
+
+    @Column()
+    nib: number;
+
+    @Column()
+    social_security: number;
+    
 
     @Column()
     position_id: string;
@@ -51,3 +100,27 @@ class Employee {
 }
 
 export { Employee };
+
+
+        // name: string;
+        // birth_date: string;
+        // place_birth: string;
+        // nationality:  string;
+        // bi: string;
+        // marital_status: string;
+        // gender: string;
+        // address: string;
+        // contact: string;
+        // email: string;
+        // nuit: string;
+        // dependents: string;
+        // salary: string;
+        // bonus: string;
+        // department: string;
+        // position: string;
+        // start_date: string;
+        // employee_status: string;
+        // bank_name: string;
+        // bank_account: string;
+        // nib: string;
+        // social_security: string;

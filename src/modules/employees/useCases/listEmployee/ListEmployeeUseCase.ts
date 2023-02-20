@@ -12,7 +12,7 @@ class ListEmployeeUseCase {
        
     async execute() {
       function formatSalary() {
-        return new Intl.NumberFormat("de-DE")
+        return new Intl.NumberFormat("de-DE",{minimumFractionDigits: 2})
       }
      
         const users = await this.employeeRepository.list();
@@ -22,9 +22,10 @@ class ListEmployeeUseCase {
           // console.log(new Date().toLocaleDateString('pt-br'))
           // console.log(user.salary)
           //  user.salary = parseFloat(user.salary.toFixed(2))
-            // user.salary = formatSalary().format(user.salary.toFixed(2))
+          user.salary = formatSalary().format(+(+user.salary).toFixed(2))
           user.birth_date = dateFormatter.format(user.birth_date)  as any
-            console.log(user.salary = (+user.salary).toLocaleString("de-DE"))
+          user.start_date = dateFormatter.format(user.start_date)  as any
+          // console.log(user.salary = (+user.salary).toLocaleString("de-DE"))
         })
 
         return users;

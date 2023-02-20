@@ -34,7 +34,90 @@ export class CreateEmployee1675600971696 implements MigrationInterface {
           {
             name: "birth_date",
             type: "Date",
+          },
+          {
+            name: "place_birth",
+            type: "varchar",
+          },
+          {
+            name: "nationality",
+            type: "varchar",
+          },
+          {
+            name: "bi",
+            type: "varchar",
+          },
+          {
+            name: "marital_status",
+            type: "varchar",
+          },
+          {
+            name: "gender",
+            type: "varchar",
+          },
+          {
+            name: "address",
+            type: "varchar",
+          },
+          {
+            name: "contact",
+            type: "int",
+          },
+          {
+            name: "contact2",
+            type: "int",
+            isNullable: true
+          },
+          {
+            name: "email",
+            type: "varchar",
+          },
+          {
+            name: "nuit",
+            type: "int",
+          },
+          {
+            name: "bonus",
+            type: "real",
+          },
+          {
+            name: "department",
+            type: "varchar",
             isNullable: true,
+          },
+          {
+            name: "position",
+            type: "varchar",
+            isNullable: true,
+          },
+          {
+            name: "start_date",
+            type: "date",
+          },
+          {
+            name: "end_date",
+            type: "date",
+            isNullable: true,
+          },
+          {
+            name: "employee_status",
+            type: "varchar",
+          },
+          {
+            name: "bank_name",
+            type: "varchar",
+          },
+          {
+            name: "bank_account",
+            type: "int",
+          },
+          {
+            name: "nib",
+            type: "int",
+          },
+          {
+            name: "social_security",
+            type: "int",
           },
           {
             name: 'created_at',
