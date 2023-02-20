@@ -14,6 +14,7 @@ class SingleEmployeeUseCase {
     async execute(id: string) {
         
         const user = await this.employeeRepository.findById(id);
+        //  console.log("SIngle UseCase: ", user)
 
         if (!user) {
           throw new AppError("Employee doesn't exists")

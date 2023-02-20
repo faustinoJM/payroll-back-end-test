@@ -73,7 +73,7 @@ class EmployeesRepository implements IEmployeesRepository {
         const user = await this.repository.findOne({
           where: { id }
         });
-
+        // console.log("ByyyyyyyyyyyyID:  ", user)
         return user;
     }
 

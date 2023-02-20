@@ -6,7 +6,7 @@ class Department {
   @PrimaryColumn()
   id: string;
 
-  @PrimaryColumn()
+  @Column()
   department_id: number;
 
   @Column()

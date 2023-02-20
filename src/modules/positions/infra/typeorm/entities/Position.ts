@@ -6,7 +6,7 @@ class Position {
   @PrimaryColumn()
   id: string;
 
-  @PrimaryColumn()
+  @Column()
   position_id: number;
 
   @Column()

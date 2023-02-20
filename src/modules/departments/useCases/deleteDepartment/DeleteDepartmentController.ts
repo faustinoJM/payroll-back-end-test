@@ -2,13 +2,12 @@ import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { ListDepartmentUseCase } from "../listDepartment/ListDepartmentUseCase";
 import { DeleteDepartmentUseCase } from "./DeleteDepartmentUseCase";
-import { SingleDepartmentUseCase } from "./SingleDepartmentUseCase";
 
 class DeleteDepartmentController {
 
     async handle(request: Request, response: Response) {
         const id = request.params.id;
-
+        
         const deleteDepartmentUseCase = container.resolve(DeleteDepartmentUseCase);
 
         const department = await deleteDepartmentUseCase.execute(id)
