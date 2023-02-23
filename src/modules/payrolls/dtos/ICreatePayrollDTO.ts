@@ -2,17 +2,18 @@ import { ISalario, IPayrollDemo } from "../useCases/listPayroll/ListPayrollUseCa
 
 interface ICreatePayrollDTO {
   id?: string;
-  employee_id?: number;
+  employee_uid?: string;
+  employee_id?: number;  
   employee_name?: string;
   dependents?: number;
   position_name?: string;
   departament_name?: string;
   salary_base?: string;
   salary_liquid?: string;
-  month?: number;
+  month?: string;
   year?: number;
-  overtime50?: string;
-  overtime100?: string;
+  overtime50?: number;
+  overtime100?: number;
   total_overtime?: string;
   month_total_workdays?: number;
   day_total_workhours?: number;

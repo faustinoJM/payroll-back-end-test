@@ -4,15 +4,15 @@ import { IPayrollDemo } from "../useCases/listPayroll/ListPayrollUseCase";
 
 interface ICreatePayrollDTO2 {
   id?: string;
+  employee_uid?: string;
   employee_id?: number;
-  name?: string;
   employee_name?: string;
   dependents?: number;
   position_name?: string;
   departament_name?: string;
   salary_base?: string;
   salary_liquid?: string;
-  month?: number;
+  month?: string;
   year?: number;
   overtime50?: number;
   overtime100?: number;

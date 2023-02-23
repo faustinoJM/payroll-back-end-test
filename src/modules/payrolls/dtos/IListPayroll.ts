@@ -1,8 +1,8 @@
-import { IPayrollDemo, ISalario } from "../useCases/listPayroll/ListPayrollUseCase";
+import { IPayrollDemo, ISalario } from "../useCases/listPayrollX/ListPayrollUseCase";
 
 interface IListPayroll {
   id?: string;
-  employee_id?: string;
+  employee_id?: number;
   name?: string;
   dependents?: number;
   positionName?: string | null;

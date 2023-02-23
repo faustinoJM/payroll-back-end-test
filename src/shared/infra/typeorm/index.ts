@@ -3,7 +3,7 @@ import { User } from "../../../modules/accounts/infra/typeorm/entities/User"
 import { UserTokens } from "../../../modules/accounts/infra/typeorm/entities/UserTokens"
 import Department from "../../../modules/departments/infra/typeorm/entities/Department"
 import { Employee } from "../../../modules/employees/infra/typeorm/entities/Employee"
-import { Payroll } from "../../../modules/payroll/infra/typeorm/entities/Payroll"
+import { Payroll } from "../../../modules/payrolls/infra/typeorm/entities/Payroll"
 import Position from "../../../modules/positions/infra/typeorm/entities/Position"
 
 

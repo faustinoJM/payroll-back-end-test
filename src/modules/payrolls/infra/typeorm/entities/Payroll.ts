@@ -1,8 +1,6 @@
 import { Column, CreateDateColumn, Double, Entity, Generated, JoinColumn, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
-import Department from "../../../../departments/infra/typeorm/entities/Department";
 import { Employee } from "../../../../employees/infra/typeorm/entities/Employee";
-import Position from "../../../../positions/infra/typeorm/entities/Position";
 import { IPayrollDemo, ISalario } from "../../../useCases/createPayroll/CreatePayrollUseCase";
 
 @Entity("payrolls")
@@ -11,22 +9,22 @@ class Payroll {
     id: string;
   
     @Column()
-    employee_id: number;
+    employee_uid: string;
 
     employee_name: string;
 
     @ManyToOne(() => Employee)
-    @JoinColumn({ name: "employee_id" })
+    @JoinColumn({ name: "employee_uid" })
     employee: Employee
 
-    @Column()
+    // @Column()
     salary_base: string;
 
-    @Column()
+    // @Column()
     salary_liquid: string;
 
     @Column()
-    month: number;
+    month: string;
 
     @Column()
     year: number;
@@ -36,12 +34,12 @@ class Payroll {
     departament_name: string;
 
     @Column()
-    overtime50: string;
+    overtime50: number;
 
     @Column()
-    overtime100: string;
+    overtime100: number;
 
-    @Column()
+    // @Column()
     total_overtime: string;
 
     @Column()
@@ -50,16 +48,16 @@ class Payroll {
     @Column()
     day_total_workhours: number;
 
-    @Column()
+    // @Column()
     base_day: string;
 
-    @Column()
+    // @Column()
     base_hour: string;
 
     @Column()
     absences: number;
 
-    @Column()
+    // @Column()
     total_absences: string;
 
     @Column()
@@ -71,13 +69,13 @@ class Payroll {
     @Column()
     bonus: string;
 
-    @Column()
+    // @Column()
     IRPS:  string;
 
-    @Column()
+    // @Column()
     INSS: string;
 
-    @Column()
+    // @Column()
     total_income: string;
 
     tabelaSalario: ISalario;

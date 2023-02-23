@@ -83,7 +83,7 @@ class ListPayrollUseCase {
           
          let employeePayroll: IListPayroll = {
             id: employee.id,
-            employee_id: employee.id,
+            employee_id: employee.employee_id,
             name: employee.name,
             dependents: employee.dependents,
             positionName: positionName(employee.position_id!)?.name,
