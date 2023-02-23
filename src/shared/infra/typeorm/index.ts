@@ -3,6 +3,7 @@ import { User } from "../../../modules/accounts/infra/typeorm/entities/User"
 import { UserTokens } from "../../../modules/accounts/infra/typeorm/entities/UserTokens"
 import Department from "../../../modules/departments/infra/typeorm/entities/Department"
 import { Employee } from "../../../modules/employees/infra/typeorm/entities/Employee"
+import { Payroll } from "../../../modules/payroll/infra/typeorm/entities/Payroll"
 import Position from "../../../modules/positions/infra/typeorm/entities/Position"
 
 
@@ -17,7 +18,7 @@ const options:  any = {
     logging: true,
     synchronize: false,
     entities: [
-      User, UserTokens, Employee, Department, Position
+      User, UserTokens, Employee, Department, Position, Payroll
         // "./src/modules/users/infra/typeorm/entities/.ts",
         // "./src/modules/appointments/infra/typeorm/entities/.ts"
 

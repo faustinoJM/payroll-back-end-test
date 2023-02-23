@@ -2,28 +2,61 @@ import { ISalario, IPayrollDemo } from "../useCases/listPayroll/ListPayrollUseCa
 
 interface ICreatePayrollDTO {
   id?: string;
-  employee_id?: string;
-  name?: string;
+  employee_id?: number;
+  employee_name?: string;
   dependents?: number;
-  positionName?: string | null;
-  departamentsName?: string | null;
-  salary_base?: number | string;
-  salary_liquid?: number | string;
+  position_name?: string;
+  departament_name?: string;
+  salary_base?: string;
+  salary_liquid?: string;
   month?: number;
   year?: number;
-  Overtime50?: number;
-  Overtime100?: number;
-  totalWorkDaysMonth?: number;
-  totalWorkHourDays?: number;
+  overtime50?: string;
+  overtime100?: string;
+  total_overtime?: string;
+  month_total_workdays?: number;
+  day_total_workhours?: number;
+  base_day?: string,
+  base_hour?: string,
   absences?: number;
-  cashAdvances?: number;
-  backpay?: number;
-  bonus?: number;
-  IRPS?: number | string;
-  INSS?: number | string;
-  totalIncome?: number | string
+  total_absences?: string;
+  cash_advances?: string;
+  backpay?: string;
+  bonus?: string;
+  IRPS?: string;
+  INSS?: string;
+  total_income?: string;
   tabelaSalario?: ISalario;
   payrollDemo?: IPayrollDemo;
 }
 
 export { ICreatePayrollDTO };
+
+
+
+// interface ICreatePayrollDTO {
+//   id: string;
+//   employee_id?: string;
+//   dependents?: number;
+//   positionName?: string | null;
+//   departamentsName?: string | null;
+//   salary_base?: number | string;
+//   salary_liquid?: number | string;
+//   month?: number;
+//   year?: number;
+//   overtime50?: number;
+//   overtime100?: number;
+//   month_total_workdays?: number;
+//   day_total_workhours?: number;
+//   absences?: number;
+//   cash_advances?: number;
+//   backpay?: number;
+//   bonus?: number;
+//   IRPS?: number | string;
+//   INSS?: number | string;
+//   total_income?: number | string
+//   tabelaSalario?: ISalario;
+//   payrollDemo?: IPayrollDemo;
+// }
+
+// export { ICreatePayrollDTO };
