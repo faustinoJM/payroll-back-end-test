@@ -17,10 +17,10 @@ class Payroll {
     @JoinColumn({ name: "employee_uid" })
     employee: Employee
 
-    // @Column()
+    @Column()
     salary_base: string;
 
-    // @Column()
+    @Column()
     salary_liquid: string;
 
     @Column()
@@ -39,7 +39,7 @@ class Payroll {
     @Column()
     overtime100: number;
 
-    // @Column()
+    @Column()
     total_overtime: string;
 
     @Column()
@@ -48,16 +48,16 @@ class Payroll {
     @Column()
     day_total_workhours: number;
 
-    // @Column()
+    @Column()
     base_day: string;
 
-    // @Column()
+    @Column()
     base_hour: string;
 
     @Column()
     absences: number;
 
-    // @Column()
+    @Column()
     total_absences: string;
 
     @Column()
@@ -69,13 +69,13 @@ class Payroll {
     @Column()
     bonus: string;
 
-    // @Column()
-    IRPS:  string;
+    @Column()
+    irps: string;
 
-    // @Column()
-    INSS: string;
+    @Column()
+    inss: string;
 
-    // @Column()
+    @Column()
     total_income: string;
 
     tabelaSalario: ISalario;

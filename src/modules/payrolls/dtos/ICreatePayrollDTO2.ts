@@ -26,8 +26,8 @@ interface ICreatePayrollDTO2 {
   cash_advances?: string;
   backpay?: string;
   bonus?: string;
-  IRPS?:  string;
-  INSS?: string;
+  irps?:  string;
+  inss?: string;
   total_income?: string;
   tabelaSalario?: ISalario;
   payrollDemo?: IPayrollDemo;

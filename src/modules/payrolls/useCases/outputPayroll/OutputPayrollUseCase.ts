@@ -46,10 +46,22 @@ class OutputPayrollUseCase {
         private departmentsRepository: IDepartmentsRepository
         ) {}
 
-    async execute() {
-      
-        const payrolls = this.payrollRepository.list()
+    async execute(year: number, month: string) {
 
+        const payrolls = await this.payrollRepository.list()
+        // const payrollByMonthYear = this.payrollRepository.findAllByYearAndByMonth(year, month)
+        // const payrollMonth = this.payrollRepository.findAllByMonth(month)
+        // const payrollByYear = this.payrollRepository.findAllByYear(year)
+
+        if(month && year && payrolls) {
+          return payrolls.filter(payroll => payroll.month === month && payroll.year === year)
+        } else if(!month && year && payrolls) {
+          return payrolls.filter(payroll => payroll.year === year)
+        } else if(month && !year && payrolls) {
+          return payrolls.filter(payroll => payroll.month === month)
+        } //else {
+        //  return payrolls
+        //}
 
         return payrolls
     }

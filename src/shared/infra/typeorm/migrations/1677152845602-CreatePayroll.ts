@@ -24,14 +24,18 @@ export class CreatePayroll1677152845602 implements MigrationInterface {
             name: "month",
             type: "varchar",
           },
-          // {
-          //   name: "salary_base",
-          //   type: "real",
-          // },
-          // {
-          //   name: "salary_liquid",
-          //   type: "real",
-          // },
+          {
+            name: "salary_base",
+            type: "real",
+          },
+          {
+            name: "total_income",
+            type: "real",
+          },
+          {
+            name: "salary_liquid",
+            type: "real",
+          },
           {
             name: "overtime50",
             type: "int",
@@ -39,6 +43,10 @@ export class CreatePayroll1677152845602 implements MigrationInterface {
           {
             name: "overtime100",
             type: "int",
+          },
+          {
+            name: "total_overtime",
+            type: "real",
           },
           {
             name: "month_total_workdays",
@@ -49,8 +57,20 @@ export class CreatePayroll1677152845602 implements MigrationInterface {
             type: "int",
           },
           {
+            name: "base_day",
+            type: "real",
+          },
+          {
+            name: "base_hour",
+            type: "real",
+          },
+          {
             name: "absences",
             type: "int",
+          },
+          {
+            name: "total_absences",
+            type: "real",
           },
           {
             name: "cash_advances",
@@ -62,6 +82,14 @@ export class CreatePayroll1677152845602 implements MigrationInterface {
           },
           {
             name: "bonus",
+            type: "real",
+          },
+          {
+            name: "irps",
+            type: "real",
+          },          
+          {
+            name: "inss",
             type: "real",
           },
           {
