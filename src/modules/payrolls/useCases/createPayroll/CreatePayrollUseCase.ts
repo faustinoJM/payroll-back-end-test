@@ -60,6 +60,7 @@ class CreatePayrollUseCase {
 
         const payrollMouth = await this.payrollRepository.findByMouth(month!)
         const payrollYear = await this.payrollRepository.findByYear(year!)
+        const payrollYearMonth = await this.payrollRepository.findAllByYearAndByMonth(year!, month!)
 
         const overtime50 = 0;
         const overtime100 = 0;
@@ -67,8 +68,8 @@ class CreatePayrollUseCase {
         const cash_advances = "0";
         const backpay = "0";
 
-
-        if(payrollMouth && payrollYear) {
+        console.log(payrollYearMonth)
+        if(!payrollYearMonth) {
           throw new AppError("O mes ja esta Pago")
         }
 

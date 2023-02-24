@@ -16,13 +16,15 @@ class InputPayrollController {
           cash_advances,
           backpay,
           bonus } = request.body;
+          const id = request.params.id;
+
 
         const inputPayrollUseCase = container.resolve(InputPayrollUseCase);
 
         const payrolls = await inputPayrollUseCase.execute({ 
+          id,
           month, 
           year,
-          employee_id,
           overtime50, 
           overtime100,
           absences,

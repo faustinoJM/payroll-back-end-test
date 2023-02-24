@@ -1,8 +1,9 @@
 import { ICreatePayrollDTO } from "../dtos/ICreatePayrollDTO";
+import { ICreatePayrollDTO2 } from "../dtos/ICreatePayrollDTO2";
 import { Payroll } from "../infra/typeorm/entities/Payroll";
 
 interface IPayrollRepository {
-    create(data: ICreatePayrollDTO): Promise<void>;
+    create(data: ICreatePayrollDTO2): Promise<void>;
     
     findByEmployeeId(employee_uid: string): Promise<Payroll | null>;
     findById(id: string): Promise<Payroll | null>;

@@ -1,6 +1,5 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../../../../shared/infra/typeorm";
-import { ICreatePayrollDTO } from "../../../dtos/ICreatePayrollDTO";
 import { ICreatePayrollDTO2 } from "../../../dtos/ICreatePayrollDTO2";
 import { IPayrollRepository } from "../../../repositories/IPayrollRepository";
 import { Payroll } from "../entities/Payroll";
@@ -37,6 +36,7 @@ class PayrollRepository implements IPayrollRepository {
       inss,
       total_income}: ICreatePayrollDTO2): Promise<void> {
         const payroll =  this.repository.create({
+          id,
           employee_uid,
           employee_name,
           position_name,

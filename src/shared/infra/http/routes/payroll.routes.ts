@@ -10,9 +10,9 @@ const listPayrollController = new ListPayrollController()
 const outputPayrollController = new OutputPayrollController();
 const inputPayrollController = new InputPayrollController();
 
-payrollRouter.get("/zabuza", createEmployeeController.handle);
-payrollRouter.get("/output", outputPayrollController.handle);
-payrollRouter.get("/input", inputPayrollController.handle);
+payrollRouter.post("/", createEmployeeController.handle);
+payrollRouter.get("/", outputPayrollController.handle);
+payrollRouter.put("/:id", inputPayrollController.handle);
 payrollRouter.post("/", listPayrollController.handle)
 
 export { payrollRouter };
