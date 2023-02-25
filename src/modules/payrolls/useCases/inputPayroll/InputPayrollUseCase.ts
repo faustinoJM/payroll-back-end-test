@@ -75,8 +75,8 @@ class InputPayrollUseCase {
         private departmentsRepository: IDepartmentsRepository
         ) {}
 
-    async execute({ id, month, year, overtime50 = 0, overtime100 = 0,
-                    absences = 10, cash_advances = 0, backpay = 0}: IRequestList) {
+    async execute({ id, overtime50, overtime100,
+                    absences, cash_advances, backpay}: IRequestList) {
         const listEmployeesPayrolls: ICreatePayrollDTO2[] = [];
         // let employeePayroll: ICreatePayrollTO = {}
         const payrolls = await this.payrollRepository.list()
@@ -84,26 +84,33 @@ class InputPayrollUseCase {
         const positions = await this.positionsRepository.list()
         const departments = await this.departmentsRepository.list()   
         const payroll = await this.payrollRepository.findById(id as string);
-        let payrolls2: Payroll[] = []
-        console.log("llllllllllllllkkkkkkkkkkkkkkk", id)
-
+        
         if(!payroll) {
           throw new AppError("Payroll doesn't exists")
         }
 
-        if(month && year && payrolls) {
-          payrolls2 = payrolls.filter(payroll => payroll.month === month && payroll.year === year)
-          // return payrolls2;
-        } else if(!month && year && payrolls) {
-          payrolls2 = payrolls.filter(payroll => payroll.year === year)
-          // return payrolls2
-        } else if(month && !year && payrolls) {
-          payrolls2 = payrolls.filter(payroll => payroll.month === month)
-          // return payrolls2
-        } else {
-          payrolls2 = payrolls
-        }
-
+        if (absences! >= 0)
+          absences = absences //absences = absences ?? +payroll.absences 
+        else
+          absences = +payroll.absences 
+        if (overtime50! >= 0) 
+          overtime50 = overtime50
+        else 
+          overtime50 = +payroll.overtime50
+        if (overtime100! >= 0) 
+          overtime100 = overtime100
+        else 
+          overtime100 = +payroll.overtime100
+        if (cash_advances! >= 0) 
+          cash_advances = cash_advances
+        else 
+          cash_advances = +payroll.cash_advances
+        if (backpay! >= 0) 
+          backpay = backpay
+        else 
+          backpay = +payroll.backpay
+  
+          console.log("auauauauau"+absences)
         if(employees.length < 0) {
             throw new AppError("Employees Doesn't Exists");
         }
@@ -120,7 +127,7 @@ class InputPayrollUseCase {
           return new Intl.NumberFormat("de-DE",{minimumFractionDigits: 2})
         }
 
-        payrolls2.map((payroll) =>{
+
           const employee =  employees.find(employee => employee.id === payroll.employee_uid)
           // console.log(employee)
           if(!employee) {
@@ -139,7 +146,7 @@ class InputPayrollUseCase {
           console.log((+employee.salary).toFixed(2))
           
          let employeePayroll: ICreatePayrollDTO2 = {
-            id: id,
+            id: payroll.id,
             employee_uid: employee.id,
             employee_name: employee.name,
             dependents: employee.dependents,
@@ -152,7 +159,7 @@ class InputPayrollUseCase {
             total_income: total_income  as any,//formatSalary().format(+(+total_income!).toFixed(2)),
             overtime50,
             overtime100,
-            total_overtime: total_overtime as any,
+            total_overtime: total_overtime as any, //((+payroll.total_overtime) + total_overtime) as any,
             month_total_workdays: payroll.month_total_workdays,
             day_total_workhours: payroll.day_total_workhours,
             base_day: base_day as any,
@@ -186,7 +193,7 @@ class InputPayrollUseCase {
           console.log(listEmployeesPayrolls)
 
           //salvar no banco de dados
-        })
+
 
         return listEmployeesPayrolls
     }

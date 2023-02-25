@@ -6,6 +6,8 @@ class InputPayrollController {
 
     async handle(request: Request, response: Response) {
         const { 
+          month, 
+          year, 
           overtime50, 
           overtime100,
           absences, 
@@ -21,6 +23,8 @@ class InputPayrollController {
 
         const payrolls = await inputPayrollUseCase.execute({ 
           id,
+          month, 
+          year,
           overtime50, 
           overtime100,
           absences,

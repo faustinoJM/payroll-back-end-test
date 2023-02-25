@@ -3,8 +3,9 @@ import AppError  from "../../../../shared/errors/AppError";
 import { IEmployeesRepository } from "../../../employees/repositories/IEmployeesRepository";
 import IPositionsRepository from "../../../positions/repositories/IPositionsRepository";
 import IDepartmentsRepository from "../../../departments/repositories/IDepartmentsRepository";
-import { ICreatePayrollDTO2 } from "../../dtos/ICreatePayrollDTO2";
 import { IPayrollRepository } from "../../repositories/IPayrollRepository";
+import { Payroll } from "../../infra/typeorm/entities/Payroll";
+import { ICreatePayrollDTO2 } from "../../dtos/ICreatePayrollDTO2";
 
 export interface ISalario {
   salarioLiquido?: number;
@@ -25,13 +26,41 @@ export interface IPayrollDemo {
   cash_advances?: number;
   backpay?: number;
   bonus?: number;
+  total_income?: number;
   salary_liquid?: number;
   IRPS?: number;
   INSS?: number
 }
 
+interface IRequestList {
+  id?: string;
+  employee_id?: number;
+  name?: string;
+  dependents?: number;
+  positionName?: string | null;
+  departamentsName?: string | null;
+  salary_base?: number | string;
+  salary_liquid?: number | string;
+  month?: string;
+  year?: number;
+  overtime50?: number;
+  overtime100?: number;
+  month_total_workdays?: number;
+  day_total_workhours?: number;
+  absences?: number;
+  cash_advances?: number;
+  backpay?: number;
+  bonus?: number;
+  IRPS?: number | string;
+  INSS?: number | string;
+  total_income?: number | string
+  tabelaSalario?: ISalario;
+  payrollDemo?: IPayrollDemo;
+}
+
+
 @injectable()
-class CreatePayrollUseCase {
+class InputPayrollUseCase {
 
     constructor(@inject("PayrollRepository")
     private payrollRepository: IPayrollRepository,
@@ -46,32 +75,33 @@ class CreatePayrollUseCase {
         private departmentsRepository: IDepartmentsRepository
         ) {}
 
-    async execute( 
-                    month: string,
-                    year: number,
-                    month_total_workdays: number = 26,
-                    day_total_workhours: number = 8,
-    ) {
+    async execute({ id, month, year, overtime50 = 0, overtime100 = 0,
+                    absences = 10, cash_advances = 0, backpay = 0}: IRequestList) {
         const listEmployeesPayrolls: ICreatePayrollDTO2[] = [];
         // let employeePayroll: ICreatePayrollTO = {}
+        const payrolls = await this.payrollRepository.list()
         const employees = await this.employeeRepository.list();
         const positions = await this.positionsRepository.list()
-        const departments = await this.departmentsRepository.list()
+        const departments = await this.departmentsRepository.list()   
+        const payroll = await this.payrollRepository.findById(id as string);
+        let payrolls2: Payroll[] = []
+        // console.log("llllllllllllllkkkkkkkkkkkkkkk", id)
 
-        const payrollMouth = await this.payrollRepository.findByMouth(month!)
-        const payrollYear = await this.payrollRepository.findByYear(year!)
-        const payrollYearMonth = await this.payrollRepository.findAllByYearAndByMonth(year!, month!)
+        if(!payroll) {
+          throw new AppError("Payroll doesn't exists")
+        }
 
-        const overtime50 = 0;
-        const overtime100 = 0;
-        const absences = 0;
-        const cash_advances = 0;
-        const backpay = 0;
-
-        console.log("lalalalal")
-        console.log(payrollYearMonth)
-        if(payrollYearMonth?.length! > 0) {
-          throw new AppError("O mes ja esta Pago")
+        if(month && year && payrolls) {
+          payrolls2 = payrolls.filter(payroll => payroll.month === month && payroll.year === year)
+          // return payrolls2;
+        } else if(!month && year && payrolls) {
+          payrolls2 = payrolls.filter(payroll => payroll.year === year)
+          // return payrolls2
+        } else if(month && !year && payrolls) {
+          payrolls2 = payrolls.filter(payroll => payroll.month === month)
+          // return payrolls2
+        } else {
+          payrolls2 = payrolls
         }
 
         if(employees.length < 0) {
@@ -90,9 +120,15 @@ class CreatePayrollUseCase {
           return new Intl.NumberFormat("de-DE",{minimumFractionDigits: 2})
         }
 
-        employees.map((employee) =>{
-          let base_day = calcSalarioEmDias(month_total_workdays!, +employee.salary)
-          let base_hour = calcSalarioPorHora(base_day, day_total_workhours!)
+        payrolls2.map((payroll) =>{
+          const employee =  employees.find(employee => employee.id === payroll.employee_uid)
+          // console.log(employee)
+          if(!employee) {
+            throw new AppError("Employee doesn exists")
+          }
+
+          let base_day = calcSalarioEmDias(payroll.month_total_workdays, +employee.salary)
+          let base_hour = calcSalarioPorHora(base_day, payroll.day_total_workhours)
           let total_overtime = calcTotalHorasExtras(base_hour, overtime50!, overtime100!)
           let total_absences = calcTotalFaltas(absences!, base_day)
           let total_income = +calcTotalSalario(+employee.salary, total_overtime!, total_absences, +cash_advances!, +backpay!, +employee.bonus).toFixed(2)
@@ -100,9 +136,10 @@ class CreatePayrollUseCase {
           let INSS = retornarINSS(+total_income!)
           let salary_liquid = calcularSalarioLiquido(+total_income!, IRPS, INSS)
           // console.log(parseFloat(employee.salary).toFixed(2))
-          console.log("++++++++++++++++"+total_overtime)
+          console.log((+employee.salary).toFixed(2))
           
          let employeePayroll: ICreatePayrollDTO2 = {
+            id: id,
             employee_uid: employee.id,
             employee_name: employee.name,
             dependents: employee.dependents,
@@ -110,14 +147,14 @@ class CreatePayrollUseCase {
             departament_name: departmentName(employee.department_id!)?.name,
             salary_base: employee.salary, //formatSalary().format(+(+employee.salary).toFixed(2)),
             salary_liquid: salary_liquid as any,//formatSalary().format(+salary_liquid.toFixed(2)),
-            month: month,
-            year: year,
+            month: payroll.month,
+            year: payroll.year,
             total_income: total_income  as any,//formatSalary().format(+(+total_income!).toFixed(2)),
             overtime50,
             overtime100,
             total_overtime: total_overtime as any,
-            month_total_workdays,
-            day_total_workhours,
+            month_total_workdays: payroll.month_total_workdays,
+            day_total_workhours: payroll.day_total_workhours,
             base_day: base_day as any,
             base_hour: base_hour as any,
             absences,
@@ -129,9 +166,8 @@ class CreatePayrollUseCase {
             inss: retornarINSS(total_income) as any,//formatSalary().format(+(+total_income! * 0.03).toFixed(2)),
             tabelaSalario: retornarTabela(+total_income!, employee.dependents),
             payrollDemo: retornarPayrollDemo(+employee.salary, overtime50,
-               overtime100, month_total_workdays, day_total_workhours, absences,
+              overtime100, payroll.month_total_workdays, payroll.day_total_workhours, absences,
               +cash_advances!, +backpay!, +employee.bonus, +total_income!, +IRPS!, +INSS!)
-
           };
 
           // let employeePayroll: ICreatePayrollDTO = {}
@@ -144,7 +180,11 @@ class CreatePayrollUseCase {
           // delete employeePayroll.tabelaSalario
           this.payrollRepository.create(employeePayroll).then().
           catch((err) => console.log(err))
+          //salvar no banco de dados
+          
           listEmployeesPayrolls.push(employeePayroll)
+          console.log(listEmployeesPayrolls)
+
           //salvar no banco de dados
         })
 
@@ -200,7 +240,6 @@ function retornarIRPS(salary: number, dependents: number) {
   return impostoPagarIRPS;
 }
 function retornarINSS(salary: number) {
-
   return salary * 0.03;
 }
 
@@ -440,5 +479,5 @@ function calcularSalarioLiquido(totalSalario: number, IRPS: number, INSS: number
 }
 
 
-export { CreatePayrollUseCase }
+export { InputPayrollUseCase }
 
